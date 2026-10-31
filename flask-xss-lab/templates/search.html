@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang = 'ko'>
+    <head>
+        <meta charset = 'utf-8'>
+        <title>방명록 - 검색</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    </head>
+    <body>
+        <h1>검색결과</h1>
+        <p>
+            검색어:
+
+            <code>{{q|safe}}</code>
+            <!-- @@@@@@reclected xss 포인트!!!: q를 그대로 랜더링함 -->
+        </p>
+        <p><a href = '/'> 메인으로 </a></p>
+        <ul>
+            {% for m in results %}
+                <li>
+                    <strong>{{m.name}}</strong>({{m.created_at}})<br>
+
+                    <div>{{m.body|safe}}</div>
+                    <!-- @@@Stored xss 지점 -->
+                </li>
+            {%else%}
+                <li>
+                    검색 결과가 없습니다.
+                </li>
+            {%endfor%}
+
+        </ul>
+    </body>
+</html>
